@@ -3,6 +3,6 @@ items:
       description: Utilisez Claude Cowork, Claude Code et Claude Design — 22 h de formation.
       status: wip
       badge: En cours
-      link: "udemy.com/course/claude-cours/"
+      link: "https://www.udemy.com/course/claude-cours/"
       linkLabel: Voir la certification
       image: "../../assets/certifications/claude.png"
