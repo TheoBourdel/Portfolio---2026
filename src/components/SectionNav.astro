@@ -1,0 +1,89 @@
+---
+const sections = [
+    { id: "hero", label: "Accueil" },
+    { id: "stack", label: "Stack" },
+    { id: "about", label: "À propos" },
+    { id: "projects", label: "Projets" },
+    { id: "certifs", label: "Certifs" },
+    { id: "contact", label: "Contact" },
+];
+---
+
+<nav class="shrink-0 flex border-t border-border bg-bg">
+    {
+        sections.map((s, i) => (
+            <a
+                href={`/#${s.id}`}
+                data-nav={s.id}
+                class="nav-item flex-1 min-w-0 flex flex-col items-center sm:items-start gap-1 sm:gap-1.5
+             px-1.5 sm:px-[18px] py-3 sm:py-4 whitespace-nowrap font-mono
+             border-t-[3px] border-border-soft text-text-muted
+             transition-colors duration-300 cursor-pointer"
+            >
+                <span class="hidden sm:block text-[11px] tracking-[0.14em]">
+                    {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                    class="nav-label block text-[10px] sm:text-[14px] font-semibold
+                   font-mono sm:font-sans tracking-[0.04em] sm:tracking-normal truncate"
+                >
+                    {s.label}
+                </span>
+            </a>
+        ))
+    }
+</nav>
+
+<style>
+    .nav-item:hover {
+        color: #9a9aab;
+    }
+    .nav-item.active {
+        border-top-color: #ff7a2f;
+        background: #1c1008;
+        color: #ffeadb;
+    }
+</style>
+
+<script>
+    const links = document.querySelectorAll<HTMLAnchorElement>("[data-nav]");
+    const screens = document.querySelectorAll<HTMLElement>(".screen");
+
+    if (screens.length) {
+        const show = (id: string) => {
+            const target = document.getElementById(id) ? id : "hero";
+            screens.forEach((s) => {
+                const on = s.id === target;
+                s.classList.toggle("active", on);
+                if (on) s.scrollTop = 0;
+            });
+            links.forEach((l) =>
+                l.classList.toggle("active", l.dataset.nav === target)
+            );
+            history.replaceState(null, "", `#${target}`);
+        };
+
+        links.forEach((l) => {
+            l.addEventListener("click", (e) => {
+                e.preventDefault();
+                show(l.dataset.nav || "hero");
+            });
+        });
+
+        document
+            .querySelectorAll<HTMLAnchorElement>(
+                'a[href^="/#"]:not([data-nav])'
+            )
+            .forEach((a) => {
+                a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    show(a.getAttribute("href")!.slice(2));
+                });
+            });
+
+        window.addEventListener("hashchange", () =>
+            show(location.hash.slice(1))
+        );
+        show(location.hash.slice(1) || "hero");
+    }
+</script>

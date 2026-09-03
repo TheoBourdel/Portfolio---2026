@@ -1,79 +1,63 @@
+---
+const facts = [
+    { value: "3 ans", label: "Expérience" },
+    { value: "16", label: "Technologies" },
+    { value: "React · TS", label: "Focus actuel" },
+];
+---
+
 <section
     id="hero"
-    class="min-h-screen flex items-center justify-center px-6 pt-20"
+    class="screen flex items-start md:items-center justify-center text-center
+                          px-[18px] md:px-11 pt-8 pb-12 md:py-16"
 >
-    <div class="max-w-4xl mx-auto text-center">
-        <div
-            class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 bg-bg-card/60 border border-border rounded-full text-sm animate-fade-in"
-        >
-            <span class="relative flex h-2 w-2">
-                <span
-                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-                ></span>
-                <span
-                    class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
-                ></span>
-            </span>
-            <span class="text-text-secondary"
-                >Disponible pour de nouveaux projets</span
+    <div class="w-full max-w-[860px] mx-auto flex flex-col items-center">
+        <div class="reveal" style="--delay: 60ms">
+            <span class="eyebrow"
+                ><span class="dot"></span>Disponible pour de nouveaux projets</span
             >
         </div>
 
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">
-            Salut, moi c'est
-            <span
-                class="bg-gradient-to-r from-accent to-accent-glow bg-clip-text text-transparent"
+        <h1
+            class="reveal mt-[30px] font-bold tracking-tightest leading-[1.02] text-[40px] md:text-[58px] xl:text-[76px] text-balance"
+            style="--delay: 160ms"
+        >
+            Je conçois des produits web <span class="text-accent">soignés.</span
             >
-                Théo
-            </span>
         </h1>
 
         <p
-            class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 animate-fade-in-up"
-            style="animation-delay: 0.1s"
+            class="reveal mt-6 max-w-[620px] text-base md:text-[19px] leading-[1.65] text-text-secondary text-pretty"
+            style="--delay: 260ms"
         >
-            Développeur FullStack passionné par la création d'expériences
-            numériques
-            <span class="text-text-primary">élégantes</span>,
-            <span class="text-text-primary">performantes</span> et
-            <span class="text-text-primary">accessibles</span>.
+            Développeur full-stack près de Paris. Élégants, rapides et
+            accessibles — du pixel au déploiement, de la conception d'interface
+            à la mise en production.
         </p>
 
         <div
-            class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
-            style="animation-delay: 0.2s"
+            class="reveal mt-8 flex flex-col sm:flex-row gap-3"
+            style="--delay: 360ms"
         >
-            <a
-                href="/cv.pdf"
-                download
-                class="inline-flex items-center justify-center
-        gap-2 px-6 py-3 bg-bg-card border border-border
-        hover:border-border-hover text-text-primary font-medium rounded-lg
-        transition-all"
+            <a href="/BOURDEL_Théo_CV.pdf" download class="btn-primary"
+                >Télécharger mon CV</a
             >
-                <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
-                    ></path>
-                </svg>
-                Télécharger mon CV
-            </a>
+            <a href="/#contact" class="btn-ghost">Me contacter</a>
+        </div>
 
-            <a
-                href="#contact"
-                class="inline-flex items-center justify-center gap-2
-            px-6 py-3 bg-bg-card border border-border hover:border-border-hover
-            text-text-primary font-medium rounded-lg transition-all"
-            >
-                Me contacter
-            </a>
+        <div
+            class="reveal w-full mt-9 md:mt-[52px] md:pt-6 md:border-t border-border
+                flex flex-wrap justify-center gap-3 md:gap-0"
+            style="--delay: 460ms"
+        >
+            {
+                facts.map((f) => (
+                    <div class="flex-1 basis-[140px] flex flex-col items-center gap-1.5">
+                        <p class="text-lg md:text-2xl font-bold">{f.value}</p>
+                        <p class="label">{f.label}</p>
+                    </div>
+                ))
+            }
         </div>
     </div>
 </section>

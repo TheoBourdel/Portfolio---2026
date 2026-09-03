@@ -1,0 +1,25 @@
+categories:
+    - name: Frontend
+      techs:
+          - { name: React, icon: siReact, level: 4, years: 1 }
+          - { name: Next.js, icon: siNextdotjs, level: 4, years: 1 }
+          - { name: Angular, icon: siAngular, level: 4, years: 3 }
+          - { name: TypeScript, icon: siTypescript, level: 4, years: 3 }
+          - { name: Astro, icon: siAstro, level: 5 }
+          - { name: Flutter, icon: siFlutter, level: 3 }
+          - { name: Tailwind, icon: siTailwindcss, level: 4, years: 3 }
+
+    - name: Backend
+      techs:
+          - { name: Node.js, icon: siNodedotjs, level: 3 }
+          - { name: Symfony, icon: siSymfony, level: 4, years: 3 }
+          - { name: PostgreSQL, icon: siPostgresql, level: 3, years: 3 }
+          - { name: MongoDB, icon: siMongodb, level: 3, years: 3 }
+          - { name: Supabase, icon: siSupabase, level: 2 }
+
+    - name: Outils
+      techs:
+          - { name: Git, icon: siGit, level: 4, years: 5 }
+          - { name: Docker, icon: siDocker, level: 3, years: 2 }
+          - { name: Figma, icon: siFigma, level: 3, years: 3 }
+          - { name: Apple, icon: siApple, level: 3 }

@@ -1,23 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
+import Header from "../components/Header.astro";
+import SectionNav from "../components/SectionNav.astro";
 import Hero from "../components/Hero.astro";
+import Stack from "../components/Stack.astro";
 import About from "../components/About.astro";
 import Projects from "../components/Projects.astro";
+import Certifications from "../components/Certifications.astro";
 import Contact from "../components/Contact.astro";
-import Stack from "../components/Stack.astro";
 ---
 
-<Layout
-    title="Théo — Portfolio"
-    description="Portfolio de Théo, développeur full-stack."
->
-    <Navbar />
-    <main>
-        <Hero />
-        <About />
-        <Stack />
-        <Projects />
-        <Contact />
-    </main>
+<Layout>
+    <div class="h-screen flex flex-col">
+        <Header />
+
+        <div class="relative flex-1 min-h-0 overflow-hidden">
+            <Hero />
+            <Stack />
+            <About />
+            <Projects />
+            <Certifications />
+            <Contact />
+        </div>
+
+        <SectionNav />
+    </div>
 </Layout>

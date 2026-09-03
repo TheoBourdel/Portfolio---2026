@@ -1,175 +1,87 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-// On charge le seul fichier "about.md"
-const aboutEntry = await getEntry("about", "about");
-const { bio, stats, experiences, studies, hobbies } = aboutEntry.data;
-
-// Mini parser inline pour le **gras** dans la bio
-const renderBio = (text: string) => {
-    return text.replace(
-        /\*\*(.+?)\*\*/g,
-        '<span class="text-text-primary font-medium">$1</span>'
-    );
-};
+const entries = await getCollection("about");
+const { headline, bio, hobbies, experiences, studies } = entries[0].data;
 ---
 
-<section id="about" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-        <!-- Header -->
-        <div class="mb-12">
-            <p class="text-accent font-mono text-sm mb-2">// 03</p>
-            <h2 class="text-3xl md:text-4xl font-bold">À propos de moi</h2>
-            <p class="text-text-secondary mt-2">
-                Quelques mots sur mon parcours et ce qui m'anime.
-            </p>
+<section
+    id="about"
+    class="screen px-[18px] md:px-7 xl:px-11 py-6 md:py-8 xl:py-11"
+>
+    <div
+        class="h-full grid xl:grid-cols-[1.05fr_.95fr] gap-7 xl:gap-11 items-center"
+    >
+        <div class="reveal min-w-0">
+            <h2 class="section-title">À propos</h2>
+
+            <h3
+                class="mt-6 text-xl md:text-[28px] font-bold tracking-[-0.02em] leading-snug"
+            >
+                {headline}
+            </h3>
+
+            <div
+                class="mt-5 space-y-3.5 text-[15px] leading-[1.7] text-text-secondary max-w-xl"
+            >
+                {bio.map((p) => <p>{p}</p>)}
+            </div>
+
+            <p class="label-accent mt-9 mb-4">Hors du code</p>
+            <div class="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                {
+                    hobbies.map((h, i) => (
+                        <div
+                            class="reveal border-l border-border pl-4 hover:border-accent transition-colors duration-300"
+                            style={`--delay: ${300 + i * 80}ms`}
+                        >
+                            <h4 class="font-semibold">{h.label}</h4>
+                            <p class="text-sm text-text-secondary mt-1 leading-relaxed">
+                                {h.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
 
-        <!-- Bento grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
-            <!-- Carte 1 : Bio -->
-            <div class="card card-glow md:col-span-2 group">
-                <div class="flex items-center gap-2 mb-4">
-                    <span
-                        class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"
-                    ></span>
-                    <h3
-                        class="text-xs font-mono text-accent uppercase tracking-wider"
-                    >
-                        Bio
-                    </h3>
-                </div>
-                <div class="space-y-3 text-text-secondary leading-relaxed">
-                    {
-                        bio.map((paragraph) => (
-                            <p set:html={renderBio(paragraph)} />
-                        ))
-                    }
-                </div>
-            </div>
-
-            <!-- Carte 2 : Stats -->
-            <div class="card card-glow">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                    <h3
-                        class="text-xs font-mono text-accent uppercase tracking-wider"
-                    >
-                        En chiffres
-                    </h3>
-                </div>
-                <ul class="space-y-3">
-                    {
-                        stats.map((stat) => (
-                            <li class="flex items-baseline justify-between">
-                                <span class="text-text-muted text-sm">
-                                    {stat.label}
-                                </span>
-                                <span
-                                    class={`text-2xl font-bold ${stat.accent ? "text-accent" : "text-text-primary"}`}
-                                >
-                                    {stat.value}
-                                </span>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-
-            <!-- Carte 3 : Parcours pro -->
-            <div class="card card-glow md:col-span-2 group">
-                <div class="flex items-center gap-2 mb-5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                    <h3
-                        class="text-xs font-mono text-accent uppercase tracking-wider"
-                    >
-                        Parcours pro
-                    </h3>
-                </div>
-                <ol class="relative border-l border-border ml-2 space-y-5">
-                    {
-                        experiences.map((exp) => (
-                            <li class="ml-6">
-                                <span
-                                    class={`absolute -left-[5px] flex items-center justify-center w-2.5 h-2.5 rounded-full ${exp.current ? "bg-accent ring-4 ring-accent/20" : "bg-border-hover"}`}
-                                />
-                                <div class="flex items-baseline justify-between gap-4 flex-wrap">
-                                    <h4 class="font-medium text-text-primary">
-                                        {exp.role}
-                                    </h4>
-                                    <span class="text-xs font-mono text-text-muted">
-                                        {exp.period}
-                                    </span>
-                                </div>
-                                <p class="text-sm text-text-secondary mt-0.5">
-                                    {exp.company}
-                                </p>
-                            </li>
-                        ))
-                    }
-                </ol>
-            </div>
-
-            <!-- Carte 4 : Études -->
-            <div class="card card-glow group">
-                <div class="flex items-center gap-2 mb-5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                    <h3
-                        class="text-xs font-mono text-accent uppercase tracking-wider"
-                    >
-                        Études
-                    </h3>
-                </div>
-                <ol class="space-y-4">
-                    {
-                        studies.map((study) => (
-                            <li>
-                                <h4 class="font-medium text-text-primary text-sm">
-                                    {study.degree}
+        <div class="reveal panel p-6 md:p-9 min-w-0" style="--delay: 160ms">
+            <p class="label-accent mb-5">Parcours pro</p>
+            <ul class="divide-y divide-border">
+                {
+                    experiences.map((e) => (
+                        <li class="py-3.5 first:pt-0 group flex items-baseline justify-between gap-6">
+                            <div>
+                                <h4 class="font-semibold group-hover:text-accent transition-colors duration-300">
+                                    {e.role}
                                 </h4>
-                                <p class="text-xs text-text-secondary mt-0.5">
-                                    {study.school}
+                                <p class="text-sm text-text-secondary mt-0.5">
+                                    {e.company}
                                 </p>
-                                <p class="text-xs font-mono text-text-muted mt-1">
-                                    {study.period}
-                                </p>
-                            </li>
-                        ))
-                    }
-                </ol>
-            </div>
-
-            <!-- Carte 5 : Hobbies -->
-            <div
-                class="card card-glow md:col-span-3 group overflow-hidden relative"
-            >
-                <div class="flex items-center gap-2 mb-5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                    <h3
-                        class="text-xs font-mono text-accent uppercase tracking-wider"
-                    >
-                        Hors du code
-                    </h3>
-                </div>
-                <p class="text-text-secondary mb-5 max-w-2xl">
-                    Quand je ne suis pas devant un écran, voici ce que vous avez
-                    plus de chances de me voir faire :
-                </p>
-                <div class="flex flex-wrap gap-3">
-                    {
-                        hobbies.map((hobby) => (
-                            <div class="group/hobby flex items-center gap-2 px-4 py-2 bg-bg-soft/60 border border-border rounded-full hover:border-accent/50 hover:bg-accent/5 transition-all cursor-default">
-                                <span class="text-lg group-hover/hobby:scale-110 transition-transform">
-                                    {hobby.icon}
-                                </span>
-                                <span class="text-sm text-text-secondary group-hover/hobby:text-text-primary transition-colors">
-                                    {hobby.label}
-                                </span>
                             </div>
-                        ))
-                    }
-                </div>
-            </div>
+                            <span class="font-mono text-xs text-text-muted shrink-0">
+                                {e.period}
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <p class="label-accent mt-9 mb-5">Études</p>
+            <ul class="divide-y divide-border">
+                {
+                    studies.map((s) => (
+                        <li class="py-3.5 first:pt-0 flex items-baseline justify-between gap-6">
+                            <h4 class="text-[17px] hover:text-accent transition-colors duration-300">
+                                {s.degree}
+                            </h4>
+                            <span class="font-mono text-xs text-text-muted shrink-0">
+                                {s.period}
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     </div>
 </section>

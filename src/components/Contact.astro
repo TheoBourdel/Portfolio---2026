@@ -1,76 +1,78 @@
 ---
-const socials = [
-    { name: "GitHub", url: "https://github.com/TheoBourdel", icon: "github" },
+const email = "bourdeltheo@gmail.com";
+const links = [
+    { label: "GitHub ↗", sub: "Code", href: "https://github.com/TheoBourdel" },
     {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/in/th%C3%A9o-bourdel-3790a81a4/",
-        icon: "linkedin",
+        label: "LinkedIn ↗",
+        sub: "Réseau",
+        href: "https://www.linkedin.com/in/th%C3%A9o-bourdel-3790a81a4/",
     },
+    { label: "Près de Paris", sub: "GMT+1" },
 ];
 ---
 
-<section id="contact" class="py-24 px-6">
-    <div class="max-w-3xl mx-auto text-center">
-        <p class="text-accent font-mono text-sm mb-2">// 03</p>
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">
-            On travaille ensemble ?
+<section
+    id="contact"
+    class="screen flex items-center justify-center text-center px-[18px] md:px-11 py-12 md:py-16"
+>
+    <div class="w-full max-w-[860px] mx-auto flex flex-col items-center">
+        <div class="reveal" style="--delay: 60ms">
+            <span class="eyebrow"
+                ><span class="dot"></span>Réponse sous 24 h</span
+            >
+        </div>
+
+        <h2
+            class="reveal mt-[30px] font-bold tracking-tightest leading-[1.02] text-[40px] md:text-[58px] xl:text-[76px]"
+            style="--delay: 160ms"
+        >
+            On travaille ensemble<span class="text-accent">?</span>
         </h2>
-        <p class="text-text-secondary text-lg mb-10 max-w-xl mx-auto">
-            Une idée de projet, une opportunité, ou simplement envie de discuter
-            ? N'hésite pas à m'écrire, je réponds rapidement.
+
+        <p
+            class="reveal mt-6 max-w-[620px] text-base md:text-[19px] leading-[1.65] text-text-secondary"
+            style="--delay: 260ms"
+        >
+            Une idée, une opportunité, ou juste envie d'échanger ? Écris-moi —
+            je réponds vite.
         </p>
 
         <a
-            href="mailto:ton.email@example.com"
-            class="inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent-glow
-             text-white font-medium rounded-lg transition-all hover:scale-105 mb-10"
+            href={`mailto:${email}`}
+            class="reveal mt-8 inline-block font-bold text-[17px] md:text-[22px] bg-accent text-bg
+              px-[22px] md:px-[30px] py-3.5 md:py-4 break-words hover:text-bg transition-all duration-300
+              hover:brightness-110"
+            style="--delay: 360ms"
         >
-            <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <path
-                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                ></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            bourdeltheo@gmail.com
+            {email}
         </a>
 
-        <div class="flex justify-center gap-6 text-text-muted">
+        <div
+            class="reveal w-full mt-9 md:mt-[52px] md:pt-6 md:border-t border-border
+                flex flex-wrap justify-center gap-3 md:gap-0"
+            style="--delay: 460ms"
+        >
             {
-                socials.map((social) => (
-                    <a
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="hover:text-text-primary transition-colors"
-                        aria-label={social.name}
-                    >
-                        {social.name}
-                    </a>
+                links.map((l) => (
+                    <div class="flex-1 basis-[140px] flex flex-col items-center gap-1.5">
+                        {l.href ? (
+                            <a
+                                href={l.href}
+                                target="_blank"
+                                rel="noopener"
+                                class="font-bold text-text-primary hover:text-accent transition-colors duration-300"
+                            >
+                                {l.label}
+                            </a>
+                        ) : (
+                            <span class="font-bold text-text-primary">
+                                {l.label}
+                            </span>
+                        )}
+                        <p class="label">{l.sub}</p>
+                    </div>
                 ))
             }
         </div>
     </div>
 </section>
-
-<footer class="py-8 px-6 border-t border-border/50 mt-12">
-    <div
-        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-muted"
-    >
-        <p>© {new Date().getFullYear()} Théo Bourdel</p>
-        <p class="font-mono">
-            <a
-                href="https://github.com/tonusername/portfolio"
-                class="hover:text-text-primary transition-colors"
-            >
-                Code source
-            </a>
-        </p>
-    </div>
-</footer>

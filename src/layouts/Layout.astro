@@ -9,36 +9,31 @@ interface Props {
 }
 
 const {
-    title = "Mon Portfolio",
-    description = "Développeur passionné — Découvrez mes projets et réalisations.",
+    title = "Théo Bourdel — Développeur full-stack",
+    description = "Développeur full-stack près de Paris. Sites et applications web élégants, rapides et accessibles.",
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="fr">
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
-    <meta name="generator" content={Astro.generator} />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="canonical" href={Astro.url.href} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={Astro.url.href} />
+        <meta name="twitter:card" content="summary_large_image" />
 
-    <title>{title}</title>
-
+        <title>{title}</title>
+    </head>
     <body>
         <div class="grid-background"></div>
-        <div class="relative z-10">
-            <slot />
-        </div>
+        <slot />
         <Analytics />
         <SpeedInsights />
     </body>

@@ -1,0 +1,91 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const entries = await getCollection("certifications");
+const items = entries[0]?.data.items ?? [];
+
+const done = items.filter((i) => i.status === "done").length;
+const wip = items.filter((i) => i.status === "wip").length;
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+
+<section
+    id="certifs"
+    class="screen flex flex-col px-[18px] md:px-7 xl:px-11 py-6 md:py-8 xl:py-11"
+>
+    <div
+        class="reveal flex flex-wrap items-baseline justify-between gap-4 mb-[22px] shrink-0"
+    >
+        <h2 class="section-title">Certifications</h2>
+        <span
+            class="font-mono text-xs text-text-muted uppercase tracking-[0.12em]"
+        >
+            {pad(done)} obtenue{done > 1 ? "s" : ""} · {pad(wip)} en cours
+        </span>
+    </div>
+
+    <div class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+        <div class="grid lg:grid-cols-2 gap-4 items-start">
+            {
+                items.map((c, i) => (
+                    <article
+                        class="reveal flex flex-col bg-bg-soft border border-border overflow-hidden
+                        hover:border-accent transition-colors duration-300"
+                        style={`--delay: ${140 + i * 110}ms`}
+                    >
+                        <div
+                            class="relative w-full h-[170px] md:h-[210px] bg-bg border-b border-border
+                      grid place-items-center overflow-hidden"
+                        >
+                            {c.image ? (
+                                <Image
+                                    src={c.image}
+                                    alt={c.title}
+                                    width={800}
+                                    height={420}
+                                    class="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <span class="label">
+                                    Visuel de la certification
+                                </span>
+                            )}
+                        </div>
+
+                        <div class="p-[22px] md:p-7 flex flex-col items-start">
+                            <span
+                                class={`badge ${c.status === "done" ? "badge-done" : "badge-wip"} mb-4`}
+                            >
+                                <span
+                                    class={`w-1.5 h-1.5 shrink-0 ${c.status === "done" ? "bg-accent" : "bg-text-muted"}`}
+                                    style="border-radius:50%"
+                                />
+                                {c.badge}
+                            </span>
+
+                            <h3 class="text-2xl md:text-[28px] font-bold tracking-[-0.02em] mb-2.5">
+                                {c.title}
+                            </h3>
+
+                            <p class="text-[15px] leading-[1.65] text-text-secondary mb-5">
+                                {c.description}
+                            </p>
+
+                            {c.link && (
+                                <a
+                                    href={c.link}
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="text-sm font-bold text-accent hover:text-accent-light transition-colors"
+                                >
+                                    {c.linkLabel} ↗
+                                </a>
+                            )}
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>

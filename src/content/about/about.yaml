@@ -1,0 +1,37 @@
+headline: Développeur full-stack basé près de Paris.
+
+bio:
+    - Je crée des sites, applications web et mobiles centrés sur l'expérience, la performance et le détail.
+    - Parcours démarré en 2021 à l'ESGI — aujourd'hui React, TypeScript et Node.js, de la conception d'interface à la mise en production.
+
+hobbies:
+    - {
+          label: Guitare,
+          description: "Depuis dix ans, surtout pour décrocher du clavier.",
+      }
+    - {
+          label: Tennis,
+          description: "Le sport qui a donné naissance à Match Point.",
+      }
+    - {
+          label: Jeux vidéo,
+          description: "Une bonne école de game feel et d'interface.",
+      }
+    - {
+          label: Lecture tech,
+          description: "Veille quotidienne, surtout front et perf.",
+      }
+
+experiences:
+    - { role: Dev Full-Stack, company: Juridifeel, period: 2022–2025 }
+    - { role: Dev React, company: HappyDevFactory, period: 2021–2022 }
+    - { role: Technicien informatique, company: ATF Gaia, period: "2020" }
+
+studies:
+    - { degree: Master Ing. Web — ESGI, school: ESGI, period: 22–24 }
+    - { degree: Bachelor Ing. Web — ESGI, school: ESGI, period: 21–22 }
+    - {
+          degree: BTS SIO (SLAM) — Ste Marie,
+          school: Sainte Marie,
+          period: 19–21,
+      }
